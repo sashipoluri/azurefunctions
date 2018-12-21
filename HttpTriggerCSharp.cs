@@ -29,7 +29,7 @@ namespace Sashi.FirstFunction
                 ? (ActionResult)new OkObjectResult($"Hello, {name}")
                 : new BadRequestObjectResult("Please pass a name on the query string or in the request body");
 
-           */
+          
 
             ProductRepository repo = new ProductRepository();
             Product product = await repo.GetAsync();
@@ -42,8 +42,18 @@ namespace Sashi.FirstFunction
             {
               return new BadRequestObjectResult("API failed");      
             }
+ */
+         ProductRepository repo = new ProductRepository();
+          Products products = await repo.GetListAsync();
 
-        
+            if(products != null)
+            {
+              return (ActionResult) new OkObjectResult($"APi call successful with product count \"{products.total}\"");     
+            } 
+            else
+            {
+              return new BadRequestObjectResult("API failed");      
+            }
         }
     }
 }
